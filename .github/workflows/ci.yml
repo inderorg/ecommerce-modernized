@@ -1,13 +1,18 @@
-name: CI
-on: [push]
+name: NodeJS with Webpack
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            - name: Set up JDK
-                uses: actions/setup-java@v2
-                with: {java-version:'1.7'}
-            - name : Build with Maven
-            run: mvn clean package -file backend/pom.xml
-              
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with: { java-version: '17'}
+      - name: Build with Maven
+        run : mvn clean package --file backend/pom.xml
